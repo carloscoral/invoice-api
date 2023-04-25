@@ -8,7 +8,9 @@
     "tsc": "npx tsc -p tsconfig.json",
     "start:dev": "npx tsc --watch & NODE_ENV=development nodemon dist",
     "start": "npm run build && node .",
-    "test": "jest --collect-coverage"
+    "test": "jest --collect-coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "keywords": [
     "billing"
@@ -19,6 +21,9 @@
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.1",
     "@types/node": "^18.16.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.1",
+    "@typescript-eslint/parser": "^5.59.1",
+    "eslint": "^8.39.0",
     "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "ts-jest": "^29.1.0",
