@@ -1,0 +1,10 @@
+dist/
+coverage/
+node_modules/
+jest.config.ts
+.eslintrc
+.prettierrc.json
+nodemon.json
+tsconfig.json
+package.json
+package-lock.json
