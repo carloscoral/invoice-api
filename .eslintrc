@@ -8,5 +8,12 @@
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended"
-    ]
+    ],
+    "rules": {
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "@typescript-eslint/no-explicit-any": ["error", {  "fixToUnknown": false }],
+        "no-empty": "error",
+        "eol-last": "error"
+    }
   }
