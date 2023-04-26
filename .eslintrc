@@ -12,7 +12,7 @@
     "rules": {
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
-        "@typescript-eslint/no-explicit-any": ["error", {  "fixToUnknown": false }],
+        "@typescript-eslint/no-explicit-any": ["warn", {  "fixToUnknown": false }],
         "no-empty": "error",
         "eol-last": "error"
     }

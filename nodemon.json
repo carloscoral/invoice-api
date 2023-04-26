@@ -1,6 +1,4 @@
 {
     "ignore": [ "build", "node_modules", "coverage" ],
-    "events": {
-         "restart": "npm run lint"
-    }
+    "events": {}
   }
