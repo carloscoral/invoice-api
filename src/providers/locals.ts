@@ -14,11 +14,13 @@ export class Locals extends Initializable {
     const mongoUrl = process.env.MONGO_URL || '';
     const loggerLevel = process.env.LOGGER_LEVEL || 'off';
     const port = process.env.PORT || 3000;
+    const corsUrl = process.env.CORS_URL || '';
 
     return {
       mongoUrl,
       loggerLevel,
-      port
+      port,
+      corsUrl
     };
   }
 }
