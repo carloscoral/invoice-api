@@ -18,6 +18,7 @@ export class InvoiceRoutes extends Routes {
     const router = Router();
 
     router.post('', (req, res, next) => this.invoiceController.createInvoice(req, res, next));
+    router.put('/:id', (req, res, next) => this.invoiceController.updateInvoice(req, res, next));
 
     app.use('/invoice', router);
     return app;

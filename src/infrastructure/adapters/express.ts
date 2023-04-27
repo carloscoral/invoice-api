@@ -15,6 +15,7 @@ import { InvoiceController } from '../controllers.ts/invoice.controller';
 import { Routes } from '../routes/routes';
 import { InvoiceRoutes } from '../routes/invoice.routes';
 import { ErrorHandlingMiddleware } from '../middlewares/error-handling.middleware';
+import { UpdateInvoiceUseCase } from '../../application/use-cases/update-invoice.use-case';
 
 
 export class Express extends Initializable<void> {
@@ -57,14 +58,19 @@ export class Express extends Initializable<void> {
   initUseCases(repositories: Repositories): UseCases {
     this.logger.info('Init use cases');
     return {
-      createInvoiceUseCase: new CreateInvoiceUseCase(repositories.invoiceRepository, this.logger)
+      createInvoiceUseCase: new CreateInvoiceUseCase(repositories.invoiceRepository, this.logger),
+      updateInvoiceUseCase: new UpdateInvoiceUseCase(repositories.invoiceRepository, this.logger)
     }
   }
 
   initControllers(useCases: UseCases): Controllers {
     this.logger.info('Init controllers');
     return {
-      invoiceController: new InvoiceController(useCases.createInvoiceUseCase, this.logger)
+      invoiceController: new InvoiceController(
+        useCases.createInvoiceUseCase,
+        useCases.updateInvoiceUseCase,
+        this.logger
+      )
     };
   }
 

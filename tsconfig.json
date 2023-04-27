@@ -28,7 +28,8 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "types": [
       "node",
-      "jest"
+      "jest",
+      "./src/index.d.ts"
     ],
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

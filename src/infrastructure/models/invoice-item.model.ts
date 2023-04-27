@@ -10,7 +10,8 @@ export const InvoiceItemSchema = new Schema<InvoiceItem>(
   },
   {
     toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    toObject: { virtuals: true },
+    _id: false
   }
 );
 

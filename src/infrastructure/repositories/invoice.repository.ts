@@ -16,15 +16,29 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
     });
     return await model.save();
   }
+
   find(): Promise<Invoice[]> {
     throw new Error("Method not implemented.");
   }
+
   findById(id: string): Promise<Invoice | null> {
     throw new Error("Method not implemented.");
   }
-  update(id: string, data: Invoice): Promise<Invoice> {
-    throw new Error("Method not implemented.");
+
+  update(id: string, data: Invoice): Promise<Invoice|null> {
+    return new Promise((resolve, reject) => {
+      InvoiceModel.findByIdAndUpdate(id, data, { new: true })
+        .then((result) => {
+          if (result) {
+            const invoice = result.toJSON();
+            resolve(invoice);
+          }
+          resolve(null);
+        })
+        .catch(error => reject(error));
+    });
   }
+
   delete(id: string): Promise<void> {
     return new Promise((resolve, reject) => {
       InvoiceModel.findByIdAndDelete(id)

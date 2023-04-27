@@ -8,6 +8,6 @@ export abstract class InvoiceRepository {
   abstract save(data: Invoice): Promise<Invoice>;
   abstract find(): Promise<Invoice[]>;
   abstract findById(id: string): Promise<Invoice|null>;
-  abstract update(id: string, data: Invoice): Promise<Invoice>;
+  abstract update(id: string, data: Invoice): Promise<Invoice|null>;
   abstract delete(id: string): Promise<void>;
 }
