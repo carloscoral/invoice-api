@@ -12,12 +12,14 @@ export class Locals extends Initializable {
     dotenv.config();
 
     const mongoUrl = process.env.MONGO_URL || '';
+    const mongoDatabase = process.env.MONGO_DATABASE || 'billing';
     const loggerLevel = process.env.LOGGER_LEVEL || 'off';
     const port = process.env.PORT || 3000;
     const corsUrl = process.env.CORS_URL || '';
 
     return {
       mongoUrl,
+      mongoDatabase,
       loggerLevel,
       port,
       corsUrl

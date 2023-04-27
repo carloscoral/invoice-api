@@ -6,6 +6,8 @@ import { Mountable } from '../interfaces/mountable';
 import { CorsMiddleware } from '../middlewares/cors.middleware';
 import { MiddlewareBootstrap } from '../middlewares/middleware-bootstrap';
 import { HttpMiddleware } from '../middlewares/http.middleware';
+import { InvoiceModel } from '../models/invoice.model';
+import mongoose from 'mongoose';
 
 export class Express extends Initializable {
   public express: express.Application;

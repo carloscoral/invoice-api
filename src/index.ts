@@ -10,7 +10,7 @@ function init() {
   const logger = new Log4jsLogger(envVars.loggerLevel);
   const app = new App(
     {
-      database: new Database(envVars.mongoUrl, logger),
+      database: new Database(envVars.mongoUrl, envVars.mongoDatabase, logger),
       server: new Express(locals, logger),
     },
     logger
