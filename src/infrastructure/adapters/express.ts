@@ -16,6 +16,7 @@ import { Routes } from '../routes/routes';
 import { InvoiceRoutes } from '../routes/invoice.routes';
 import { ErrorHandlingMiddleware } from '../middlewares/error-handling.middleware';
 import { UpdateInvoiceUseCase } from '../../application/use-cases/update-invoice.use-case';
+import { DeleteInvoiceUseCase } from '../../application/use-cases/delete-invoice.use-case';
 
 
 export class Express extends Initializable<void> {
@@ -59,7 +60,8 @@ export class Express extends Initializable<void> {
     this.logger.info('Init use cases');
     return {
       createInvoiceUseCase: new CreateInvoiceUseCase(repositories.invoiceRepository, this.logger),
-      updateInvoiceUseCase: new UpdateInvoiceUseCase(repositories.invoiceRepository, this.logger)
+      updateInvoiceUseCase: new UpdateInvoiceUseCase(repositories.invoiceRepository, this.logger),
+      deleteInvoiceUseCase: new DeleteInvoiceUseCase(repositories.invoiceRepository, this.logger)
     }
   }
 
@@ -69,6 +71,7 @@ export class Express extends Initializable<void> {
       invoiceController: new InvoiceController(
         useCases.createInvoiceUseCase,
         useCases.updateInvoiceUseCase,
+        useCases.deleteInvoiceUseCase,
         this.logger
       )
     };

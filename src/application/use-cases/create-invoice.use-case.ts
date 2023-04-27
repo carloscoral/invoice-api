@@ -10,7 +10,7 @@ export class CreateInvoiceUseCase extends UseCase<Invoice> {
     logger.info('Init CreateInvoiceUseCase');
   }
 
-  async execute(data: Invoice): Promise<Invoice> {
+  execute(data: Invoice): Promise<Invoice> {
     this.logger.debug('Execute CreateInvoiceUseCase');
     return this.invoiceRepository.save(data);
   }

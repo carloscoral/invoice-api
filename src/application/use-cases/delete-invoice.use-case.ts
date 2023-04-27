@@ -3,15 +3,15 @@ import { UseCase } from "./use-case";
 import { Logger } from "../../domain/models/logger";
 import { Invoice } from "../../domain/models/invoice";
 
-export class UpdateInvoiceUseCase extends UseCase<Invoice|null> {
+export class DeleteInvoiceUseCase extends UseCase<Invoice|null> {
 
   constructor(private invoiceRepository: InvoiceRepository, logger: Logger) {
     super(logger);
-    logger.info('Init UpdateInvoiceUseCase');
+    logger.info('Init DeleteInvoiceUseCase');
   }
 
-  execute(data: { id: string, invoice: Invoice }): Promise<Invoice|null> {
-    this.logger.debug('Execute UpdateInvoiceUseCase');
-    return this.invoiceRepository.update(data.id, data.invoice);
+  execute(id: string): Promise<void> {
+    this.logger.debug('Execute DeleteInvoiceUseCase');
+    return this.invoiceRepository.delete(id);
   }
 }
