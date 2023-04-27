@@ -1,5 +1,5 @@
 export interface InvoiceItem {
-  _id: unknown;
+  id?: unknown;
   baseValue: number;
   iva: number;
   description: string;

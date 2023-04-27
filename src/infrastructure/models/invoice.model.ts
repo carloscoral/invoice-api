@@ -4,7 +4,7 @@ import { InvoiceItemSchema } from './invoice-item.model';
 
 export const InvoiceSchema = new Schema<Invoice>(
   {
-    number: { type: String, unique: true },
+    number: { type: String },
     items: {
       type: [InvoiceItemSchema],
       default: [],
@@ -16,7 +16,8 @@ export const InvoiceSchema = new Schema<Invoice>(
   },
   {
     toJSON: { virtuals: true },
-    toObject: { virtuals: true }
+    toObject: { virtuals: true },
+    versionKey: false
   }
 );
 

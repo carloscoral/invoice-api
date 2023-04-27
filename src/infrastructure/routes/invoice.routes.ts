@@ -13,10 +13,11 @@ export class InvoiceRoutes extends Routes {
   }
 
   mount(app: Application): Application {
+    this.logger.info('Mounting InvoiceRoutes');
 
     const router = Router();
 
-    router.post('', this.invoiceController.createInvoice);
+    router.post('', (req, res, next) => this.invoiceController.createInvoice(req, res, next));
 
     app.use('/invoice', router);
     return app;

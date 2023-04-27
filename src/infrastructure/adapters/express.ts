@@ -14,6 +14,7 @@ import { Controllers } from '../interfaces/controllers';
 import { InvoiceController } from '../controllers.ts/invoice.controller';
 import { Routes } from '../routes/routes';
 import { InvoiceRoutes } from '../routes/invoice.routes';
+import { ErrorHandlingMiddleware } from '../middlewares/error-handling.middleware';
 
 
 export class Express extends Initializable<void> {
@@ -24,6 +25,7 @@ export class Express extends Initializable<void> {
     this.express = express();
     this.mountMiddlewares();
     this.mountRoutes();
+    this.mountPostMiddlewares();
   }
 
   mountMiddlewares() {
@@ -31,6 +33,15 @@ export class Express extends Initializable<void> {
     const middlewares: Mountable<Application>[] = [
       new CorsMiddleware(this.logger),
       new HttpMiddleware(this.logger)
+    ];
+    const bootstrap = new MiddlewareBootstrap(middlewares);
+    this.express = bootstrap.init(this.express);
+  }
+
+  mountPostMiddlewares() {
+    this.logger.info('Mounting post middlewares');
+    const middlewares: Mountable<Application>[] = [
+      new ErrorHandlingMiddleware(this.logger)
     ];
     const bootstrap = new MiddlewareBootstrap(middlewares);
     this.express = bootstrap.init(this.express);
