@@ -2,7 +2,7 @@ import { Application } from 'express';
 import * as dotenv from 'dotenv';
 import { Initializable } from '../interfaces/initializable';
 
-export class Locals extends Initializable {
+export class Locals extends Initializable<Application> {
   init(express: Application): Application {
     express.locals.app = Locals.getConfig();
     return express;

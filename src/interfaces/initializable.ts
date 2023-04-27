@@ -1,5 +1,3 @@
-import { Application } from 'express';
-
-export abstract class Initializable {
-  abstract init(app?: Application): Application | void | Promise<Application | void>;
+export abstract class Initializable<T> {
+  abstract init(app?: T): T | void | Promise<T | void>;
 }

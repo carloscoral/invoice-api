@@ -4,7 +4,7 @@ import { Mountable } from '../interfaces/mountable';
 import { Locals } from '../providers/locals';
 import { Logger } from '../interfaces/logger';
 
-export class CorsMiddleware extends Mountable {
+export class CorsMiddleware extends Mountable<Application> {
   
   constructor(private logger: Logger) {
     super();

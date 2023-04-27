@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { Initializable } from '../interfaces/initializable';
 import { Logger } from '../interfaces/logger';
 
-export class Database extends Initializable {
+export class Database extends Initializable<void> {
   constructor(private url: string, private db: string, private logger: Logger) {
     super();
   }

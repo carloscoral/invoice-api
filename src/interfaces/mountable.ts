@@ -1,5 +1,3 @@
-import { Application } from "express";
-
-export abstract class Mountable {
-  abstract mount(app: Application): Application;
+export abstract class Mountable<T> {
+  abstract mount(app: T): T;
 }

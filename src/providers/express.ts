@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Application } from 'express';
 import { Initializable } from '../interfaces/initializable';
 import { Logger } from '../interfaces/logger';
 import { Locals } from './locals';
@@ -9,7 +9,7 @@ import { HttpMiddleware } from '../middlewares/http.middleware';
 import { InvoiceModel } from '../models/invoice.model';
 import mongoose from 'mongoose';
 
-export class Express extends Initializable {
+export class Express extends Initializable<void> {
   public express: express.Application;
 
   constructor(private locals: Locals, private logger: Logger) {
@@ -26,7 +26,7 @@ export class Express extends Initializable {
 
   mountMiddlewares() {
     this.logger.info('Mounting middlewares');
-    const middlewares: Mountable[] = [
+    const middlewares: Mountable<Application>[] = [
       new CorsMiddleware(this.logger),
       new HttpMiddleware(this.logger)
     ];

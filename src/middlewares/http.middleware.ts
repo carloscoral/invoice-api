@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser';
 import { Logger } from '../interfaces/logger';
 import { Mountable } from '../interfaces/mountable';
 
-export class HttpMiddleware extends Mountable {
+export class HttpMiddleware extends Mountable<Application> {
 
   constructor(private logger: Logger) {
     super();

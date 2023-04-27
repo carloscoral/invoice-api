@@ -2,11 +2,11 @@ import { Initializable } from '../interfaces/initializable';
 import { Logger } from '../interfaces/logger';
 
 export interface AppInitializables {
-  database: Initializable;
-  server: Initializable;
+  database: Initializable<void>;
+  server: Initializable<void>;
 }
 
-export class App implements Initializable {
+export class App implements Initializable<void> {
   constructor(private initializables: AppInitializables, private logger: Logger) {}
 
   async init() {
