@@ -5,6 +5,6 @@ export interface Invoice {
   number: string;
   items: InvoiceItem[];
   paid: boolean;
-  total: number;
-  total_iva: number;
+  total?: number;
+  total_iva?: number;
 }

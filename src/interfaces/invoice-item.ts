@@ -3,5 +3,5 @@ export interface InvoiceItem {
   iva: number;
   description: string;
   amount: number;
-  total: number;
+  total?: number;
 }

@@ -22,7 +22,7 @@ export const InvoiceSchema = new Schema<Invoice>(
 
 InvoiceSchema.virtual('total').get(function () {
   return this.items.reduce((prev, curr) => {
-    return prev + curr.total * curr.amount;
+    return prev + (curr.total || 0) * curr.amount;
   }, 0);
 });
 
