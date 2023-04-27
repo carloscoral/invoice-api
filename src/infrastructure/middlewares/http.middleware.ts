@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import * as bodyParser from 'body-parser';
-import { Logger } from '../interfaces/logger';
+import { Logger } from '../../domain/models/logger';
 import { Mountable } from '../interfaces/mountable';
 
 export class HttpMiddleware extends Mountable<Application> {

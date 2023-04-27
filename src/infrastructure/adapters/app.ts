@@ -1,5 +1,5 @@
 import { Initializable } from '../interfaces/initializable';
-import { Logger } from '../interfaces/logger';
+import { Logger } from '../../domain/models/logger';
 
 export interface AppInitializables {
   database: Initializable<void>;

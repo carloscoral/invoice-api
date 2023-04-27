@@ -1,7 +1,7 @@
 import { InvoiceItem } from './invoice-item';
 
 export interface Invoice {
-  id?: unknown;
+  _id?: unknown;
   number: string;
   items: InvoiceItem[];
   paid: boolean;

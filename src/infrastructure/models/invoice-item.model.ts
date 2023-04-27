@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { InvoiceItem } from '../interfaces/invoice-item';
+import { InvoiceItem } from '../../domain/models/invoice-item';
 
 export const InvoiceItemSchema = new Schema<InvoiceItem>(
   {

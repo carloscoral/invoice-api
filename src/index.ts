@@ -1,8 +1,8 @@
-import { App } from './providers/app';
-import { Database } from './providers/database';
-import { Express } from './providers/express';
-import { Locals } from './providers/locals';
-import { Log4jsLogger } from './providers/log4js.logger';
+import { App } from './infrastructure/adapters/app';
+import { Database } from './infrastructure/adapters/database';
+import { Express } from './infrastructure/adapters/express';
+import { Locals } from './infrastructure/adapters/locals';
+import { Log4jsLogger } from './infrastructure/adapters/log4js.logger';
 
 function init() {
   const envVars = Locals.getConfig();

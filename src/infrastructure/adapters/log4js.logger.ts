@@ -1,5 +1,5 @@
 import * as log4js from 'log4js';
-import { Logger } from '../interfaces/logger';
+import { Logger } from '../../domain/models/logger';
 
 export class Log4jsLogger extends Logger {
 

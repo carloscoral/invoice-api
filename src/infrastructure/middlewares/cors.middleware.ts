@@ -1,8 +1,8 @@
 import { Application } from 'express';
 import cors, { CorsOptions } from 'cors';
 import { Mountable } from '../interfaces/mountable';
-import { Locals } from '../providers/locals';
-import { Logger } from '../interfaces/logger';
+import { Locals } from '../adapters/locals';
+import { Logger } from '../../domain/models/logger';
 
 export class CorsMiddleware extends Mountable<Application> {
   

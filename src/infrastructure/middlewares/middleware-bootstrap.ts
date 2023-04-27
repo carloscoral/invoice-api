@@ -1,6 +1,6 @@
 import { Application } from 'express';
 import { Initializable } from '../interfaces/initializable';
-import { Mountable } from 'interfaces/mountable';
+import { Mountable } from '../interfaces/mountable';
 
 export class MiddlewareBootstrap extends Initializable<Application> {
 
