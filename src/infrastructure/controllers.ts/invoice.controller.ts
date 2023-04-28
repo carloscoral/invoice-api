@@ -6,7 +6,8 @@ import { invoiceValidator } from "../validators/invoice.validator";
 import { UpdateInvoiceUseCase } from "../../application/use-cases/update-invoice.use-case";
 import { idValidator } from "../validators/id.validator";
 import { DeleteInvoiceUseCase } from "../../application/use-cases/delete-invoice.use-case";
-import { FindInvoiceUseCase } from "application/use-cases/find-invoice.use-case";
+import { FindInvoiceUseCase } from "../../application/use-cases/find-invoice.use-case";
+import { FindInvoiceByIdUseCase } from "../../application/use-cases/find-invoice-by-id.use-case";
 
 export class InvoiceController extends Controller {
 
@@ -15,10 +16,25 @@ export class InvoiceController extends Controller {
     private updateInvoiceUseCase: UpdateInvoiceUseCase,
     private deleteInvoiceUseCase: DeleteInvoiceUseCase,
     private findInvoiceUseCase: FindInvoiceUseCase,
+    private findInvoiceByIdUseCase: FindInvoiceByIdUseCase,
     logger: Logger
   ) {
     super(logger);
     logger.info('Init InvoiceController');
+  }
+
+  async getInvoice(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { params } = req;
+      const { id } = idValidator.validateSync(params, { abortEarly: false, stripUnknown: true });
+      const result = await this.findInvoiceByIdUseCase.execute(id);
+      if (!result) {
+        return res.status(404).json({ error: 'Not found'});
+      }
+      return res.json(result);
+    } catch (e) {
+      next(e);
+    }
   }
 
   async getInvoices(req: Request, res: Response, next: NextFunction) {

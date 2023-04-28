@@ -44,7 +44,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
   }
 
   findById(id: string): Promise<Invoice | null> {
-    throw new Error("Method not implemented.");
+    return InvoiceModel.findById(id).exec();
   }
 
   update(id: string, data: Invoice): Promise<Invoice|null> {
