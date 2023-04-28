@@ -1,0 +1,398 @@
+openapi: 3.0.3
+info:
+  title: Billing Api
+  description: |-
+    This is the api documentation for billing api.
+  contact:
+    email: coralcarlos21@gmail.com
+  license:
+    name: UNLICENSED
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: auth
+    description: Auth api
+  - name: invoice
+    description: Invoice management
+paths:
+  /auth/sign-in:
+    post:
+      tags:
+        - auth
+      summary: Sign in user
+      description: |-
+        Api to sign in users. This api uses a mock. You can sign in using the credentials username: admin password: admin
+      operationId: signIn
+      requestBody:
+        description: Sign in user credentials
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Credentials'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization'
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - bearerAuth: []
+  /invoice:
+    post:
+      tags:
+        - invoice
+      summary: Create invoice
+      description: |-
+        Api to create invoices
+      operationId: createInvoice
+      requestBody:
+        description: New invoice data
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateInvoice"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Invoice"
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - bearerAuth: []
+    get:
+      tags:
+        - invoice
+      summary: Get invoices
+      description: |-
+        Api to get invoices with filters
+      operationId: getInvoices
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          description: id to search
+        - in: query
+          name: number
+          schema:
+            type: string
+          description: number to search
+        - in: query
+          name: paid
+          schema:
+            type: boolean
+          description: search for paid invoices
+        - in: query
+          name: total
+          schema:
+            type: number
+          description: search for invoices with this total
+        - in: query
+          name: total_iva
+          schema:
+            type: number
+          description: search for invoices with this iva
+        - in: query
+          name: item_amount
+          schema:
+            type: number
+          description: Search for invoices with items containing this amount
+        - in: query
+          name: item_base_value
+          schema:
+            type: number
+          description: Search for invoices with items containing this base value
+        - in: query
+          name: item_description
+          schema:
+            type: string
+          description: Search for invoices with items containing this description
+        - in: query
+          name: item_iva
+          schema:
+            type: number
+          description: Search for invoices with items containing this iva value
+        - in: query
+          name: item_total
+          schema:
+            type: number
+          description: Search for invoices with items containing this total value
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoices'
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+      security:
+        - bearerAuth: []
+  /invoice/{invoiceId}:
+    get:
+      tags:
+        - invoice
+      summary: Get invoice
+      description: |-
+        Api to get an invoice
+      operationId: getInvoice
+      parameters:
+        - in: path
+          name: invoiceId
+          required: true
+          schema:
+            type: string
+          description: Invoice id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - invoice
+      summary: Update invoice
+      description: |-
+        Api to update an invoice
+      operationId: updateInvoice
+      parameters:
+        - in: path
+          name: invoiceId
+          required: true
+          schema:
+            type: string
+          description: Invoice id
+      requestBody:
+        description: Update invoice data
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateInvoice"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - invoice
+      summary: Delete invoice
+      description: |-
+        Api to delete an invoice
+      operationId: deleteInvoice
+      parameters:
+        - in: path
+          name: invoiceId
+          required: true
+          schema:
+            type: string
+          description: Invoice id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Empty'
+        '401':
+          description: Not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotAuthorized'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+  schemas:
+    Credentials:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          example: admin
+        password:
+          type: string
+          example: admin
+    Authorization:
+      type: object
+      properties:
+        type:
+          type: string
+          example: 'Bearer'
+        token:
+          type: string
+    NotAuthorized:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Not Authorized
+    ValidationError:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: string
+            example: 'username is a required field'
+    CreateOrUpdateInvoice:
+      type: object
+      required:
+        - number
+        - paid
+        - items
+      properties:
+        number:
+          type: string
+          example: 12345
+        paid:
+          type: boolean
+          example: false
+        items:
+          type: array
+          items:
+            type: object
+            required:
+              - baseValue
+              - iva
+              - description
+              - amount
+            properties:
+              baseValue:
+                description: Value in cents
+                type: number
+                example: 10000
+              iva:
+                description: Value between 0 and 1
+                type: number
+                example: 0.19
+              description:
+                type: string
+                example: 'Cemento'
+              amount:
+                type: number
+                example: 10
+    Invoice:
+      type: object
+      properties:
+        number:
+          type: string
+          example: "12345"
+        paid:
+          type: boolean
+          example: false
+        total:
+          type: number
+          example: 11900
+        total_iva:
+          type: number
+          example: 1900
+        id:
+          type: string
+          example: 644b4381e39b1b9c41d995fa
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/InvoiceItem"
+    InvoiceItem:
+      type: object
+      properties:
+        baseValue:
+          type: number
+          example: 10000
+        iva:
+          type: number
+          example: 0.19
+        description:
+          type: string
+          example: Cemento
+        amount:
+          type: number
+          example: 1
+        total:
+          type: number
+          example: 11900
+    Invoices:
+      type: array
+      items:
+        $ref: '#/components/schemas/Invoice'
+    Empty:
+      type: object

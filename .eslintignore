@@ -5,3 +5,4 @@ dist/
 containers/
 index.d.ts
 .env
+docs/
