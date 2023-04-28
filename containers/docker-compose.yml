@@ -3,11 +3,22 @@ services:
   mongo-db:
     image: mongo
     container_name: mongo-db
-    ports:
-      - "27017:27017"
     volumes:
       - ./data/mongo:/data/db
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
-      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+      MONGO_INITDB_ROOT_USERNAME: billing # Estas variables se almacenaran en un archivo .env, por facilidad están directamente aqui
+      MONGO_INITDB_ROOT_PASSWORD: billing
+      MONGO_INITDB_DATABASE: billing
+
+  api:
+    build:
+      context: ../
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URL: mongodb://billing:billing@mongo-db:27017
+      MONGO_DATABASE: billing
+      LOGGER_LEVEL: debug
+      CORS_URL: '*'
+      JWT_SECRET: e^zNkwndyWVCyB99eB8kUer$LceL&+2M+TY5E8&RWEdq5aa2Lw+b*XjrgUhshr+T
+      
