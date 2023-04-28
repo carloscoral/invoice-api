@@ -22,6 +22,8 @@ export const InvoiceItemSchema = new Schema<InvoiceItem>(
 );
 
 InvoiceItemSchema.post('findOneAndUpdate', function (doc) {
-  doc.total = doc.baseValue * doc.iva + doc.baseValue;
-  doc.save();
+  if (doc) {
+    doc.total = doc.baseValue * doc.iva + doc.baseValue;
+    doc.save();
+  }
 });

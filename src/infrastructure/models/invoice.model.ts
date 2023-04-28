@@ -39,13 +39,15 @@ export const InvoiceSchema = new Schema<Invoice>(
 );
 
 InvoiceSchema.post('findOneAndUpdate', function (doc) {
-  doc.total = doc.items.reduce((prev: number, curr: InvoiceItem) => {
-    return prev + (curr.total || 0) * curr.amount;
-  }, 0);
-  doc.total_iva = doc.items.reduce((prev: number, curr: InvoiceItem) => {
-    return prev + curr.baseValue * curr.iva * curr.amount;
-  }, 0);
-  doc.save();
+  if (doc) {
+    doc.total = doc.items.reduce((prev: number, curr: InvoiceItem) => {
+      return prev + (curr.total || 0) * curr.amount;
+    }, 0);
+    doc.total_iva = doc.items.reduce((prev: number, curr: InvoiceItem) => {
+      return prev + curr.baseValue * curr.iva * curr.amount;
+    }, 0);
+    doc.save();
+  }
 });
 
 export const InvoiceModel = model<Invoice>('Invoice', InvoiceSchema);

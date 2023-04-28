@@ -1,7 +1,7 @@
-import { InvoiceRepository } from '../../domain/repositories/invoice.repository';
-import { UseCase } from './use-case';
-import { Logger } from '../../domain/models/logger';
-import { Invoice } from '../../domain/models/invoice';
+import { InvoiceRepository } from '../../../domain/repositories/invoice.repository';
+import { UseCase } from '../use-case';
+import { Logger } from '../../../domain/models/logger';
+import { Invoice } from '../../../domain/models/invoice';
 
 export class CreateInvoiceUseCase extends UseCase<Invoice> {
   constructor(private invoiceRepository: InvoiceRepository, logger: Logger) {

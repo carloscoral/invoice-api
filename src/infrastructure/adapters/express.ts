@@ -6,7 +6,7 @@ import { Mountable } from '../interfaces/mountable';
 import { CorsMiddleware } from '../middlewares/cors.middleware';
 import { MiddlewareBootstrap } from '../middlewares/middleware-bootstrap';
 import { HttpMiddleware } from '../middlewares/http.middleware';
-import { CreateInvoiceUseCase } from '../../application/use-cases/create-invoice.use-case';
+import { CreateInvoiceUseCase } from '../../application/use-cases/invoice/create-invoice.use-case';
 import { InvoiceRepositoryImpl } from '../repositories/invoice.repository';
 import { Repositories } from '../interfaces/repositories';
 import { UseCases } from '../interfaces/use-cases';
@@ -15,10 +15,14 @@ import { InvoiceController } from '../controllers.ts/invoice.controller';
 import { Routes } from '../routes/routes';
 import { InvoiceRoutes } from '../routes/invoice.routes';
 import { ErrorHandlingMiddleware } from '../middlewares/error-handling.middleware';
-import { UpdateInvoiceUseCase } from '../../application/use-cases/update-invoice.use-case';
-import { DeleteInvoiceUseCase } from '../../application/use-cases/delete-invoice.use-case';
-import { FindInvoiceUseCase } from '../../application/use-cases/find-invoice.use-case';
-import { FindInvoiceByIdUseCase } from '../../application/use-cases/find-invoice-by-id.use-case';
+import { UpdateInvoiceUseCase } from '../../application/use-cases/invoice/update-invoice.use-case';
+import { DeleteInvoiceUseCase } from '../../application/use-cases/invoice/delete-invoice.use-case';
+import { FindInvoiceUseCase } from '../../application/use-cases/invoice/find-invoice.use-case';
+import { FindInvoiceByIdUseCase } from '../../application/use-cases/invoice/find-invoice-by-id.use-case';
+import { AuthController } from '../controllers.ts/auth.controller';
+import { AuthRoutes } from '../routes/auth.routes';
+import { SignInUseCase } from '../../application/use-cases/auth/sign-in.use-case';
+import { UserRepositoryImpl } from '../repositories/user.repository';
 
 export class Express extends Initializable<void> {
   public express: express.Application;
@@ -45,10 +49,11 @@ export class Express extends Initializable<void> {
     this.express = bootstrap.init(this.express);
   }
 
-  initRepositories() {
+  initRepositories(): Repositories {
     this.logger.info('Init repositories');
     return {
       invoiceRepository: new InvoiceRepositoryImpl(this.logger),
+      userRepository: new UserRepositoryImpl(this.logger),
     };
   }
 
@@ -60,6 +65,7 @@ export class Express extends Initializable<void> {
       deleteInvoiceUseCase: new DeleteInvoiceUseCase(repositories.invoiceRepository, this.logger),
       findInvoiceUseCase: new FindInvoiceUseCase(repositories.invoiceRepository, this.logger),
       findInvoiceByIdUseCase: new FindInvoiceByIdUseCase(repositories.invoiceRepository, this.logger),
+      signInUseCase: new SignInUseCase(repositories.userRepository, this.logger),
     };
   }
 
@@ -74,6 +80,10 @@ export class Express extends Initializable<void> {
         useCases.findInvoiceByIdUseCase,
         this.logger,
       ),
+      authController: new AuthController(
+        useCases.signInUseCase,
+        this.logger,
+      ),
     };
   }
 
@@ -82,7 +92,10 @@ export class Express extends Initializable<void> {
     const repositories = this.initRepositories();
     const useCases = this.initUseCases(repositories);
     const controllers = this.initControllers(useCases);
-    const routes: Routes[] = [new InvoiceRoutes(controllers.invoiceController, this.logger)];
+    const routes: Routes[] = [
+      new InvoiceRoutes(controllers.invoiceController, this.logger),
+      new AuthRoutes(controllers.authController, this.logger),
+    ];
     for (const route of routes) {
       this.express = route.mount(this.express);
     }

@@ -16,6 +16,7 @@ export class Locals extends Initializable<Application> {
     const loggerLevel = process.env.LOGGER_LEVEL || 'off';
     const port = process.env.PORT || 3000;
     const corsUrl = process.env.CORS_URL || '';
+    const jwtSecret = process.env.JWT_SECRET || '';
 
     return {
       mongoUrl,
@@ -23,6 +24,7 @@ export class Locals extends Initializable<Application> {
       loggerLevel,
       port,
       corsUrl,
+      jwtSecret,
     };
   }
 }

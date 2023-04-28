@@ -1,13 +1,13 @@
-import { CreateInvoiceUseCase } from '../../application/use-cases/create-invoice.use-case';
+import { CreateInvoiceUseCase } from '../../application/use-cases/invoice/create-invoice.use-case';
 import { Controller } from './controller';
 import { Logger } from '../../domain/models/logger';
 import { NextFunction, Request, Response } from 'express';
 import { invoiceValidator } from '../validators/invoice.validator';
-import { UpdateInvoiceUseCase } from '../../application/use-cases/update-invoice.use-case';
+import { UpdateInvoiceUseCase } from '../../application/use-cases/invoice/update-invoice.use-case';
 import { idValidator } from '../validators/id.validator';
-import { DeleteInvoiceUseCase } from '../../application/use-cases/delete-invoice.use-case';
-import { FindInvoiceUseCase } from '../../application/use-cases/find-invoice.use-case';
-import { FindInvoiceByIdUseCase } from '../../application/use-cases/find-invoice-by-id.use-case';
+import { DeleteInvoiceUseCase } from '../../application/use-cases/invoice/delete-invoice.use-case';
+import { FindInvoiceUseCase } from '../../application/use-cases/invoice/find-invoice.use-case';
+import { FindInvoiceByIdUseCase } from '../../application/use-cases/invoice/find-invoice-by-id.use-case';
 
 export class InvoiceController extends Controller {
   constructor(
