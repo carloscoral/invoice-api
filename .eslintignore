@@ -2,4 +2,5 @@ jest.config.ts
 node_modules/
 coverage/
 dist/
+containers/
 .env
