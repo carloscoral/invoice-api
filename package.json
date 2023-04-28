@@ -1,5 +1,5 @@
 {
-  "name": "billing",
+  "name": "billing-api",
   "version": "1.0.0",
   "description": "Billing api",
   "main": "dist/index.js",
