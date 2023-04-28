@@ -6,6 +6,7 @@ import { invoiceValidator } from "../validators/invoice.validator";
 import { UpdateInvoiceUseCase } from "../../application/use-cases/update-invoice.use-case";
 import { idValidator } from "../validators/id.validator";
 import { DeleteInvoiceUseCase } from "../../application/use-cases/delete-invoice.use-case";
+import { FindInvoiceUseCase } from "application/use-cases/find-invoice.use-case";
 
 export class InvoiceController extends Controller {
 
@@ -13,10 +14,21 @@ export class InvoiceController extends Controller {
     private createInvoiceUseCase: CreateInvoiceUseCase,
     private updateInvoiceUseCase: UpdateInvoiceUseCase,
     private deleteInvoiceUseCase: DeleteInvoiceUseCase,
+    private findInvoiceUseCase: FindInvoiceUseCase,
     logger: Logger
   ) {
     super(logger);
     logger.info('Init InvoiceController');
+  }
+
+  async getInvoices(req: Request, res: Response, next: NextFunction) {
+    try {
+      const query = req.query;
+      const result = await this.findInvoiceUseCase.execute(query);
+      return res.json(result);
+    } catch (e) {
+      next(e);
+    }
   }
 
   async createInvoice(req: Request, res: Response, next: NextFunction) {

@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { Invoice } from '../../domain/models/invoice';
 import { InvoiceItemSchema } from './invoice-item.model';
+import { InvoiceItem } from 'domain/models/invoice-item';
 
 export const InvoiceSchema = new Schema<Invoice>(
   {
@@ -12,6 +13,22 @@ export const InvoiceSchema = new Schema<Invoice>(
     paid: {
       type: Boolean,
       default: false,
+    },
+    total: {
+      type: Number,
+      default: function (data: Invoice) {
+        return data.items.reduce((prev, curr) => {
+          return prev + (curr.total || 0) * curr.amount;
+        }, 0);
+      }
+    },
+    total_iva: {
+      type: Number,
+      default: function(data: Invoice) {
+        return data.items.reduce((prev, curr) => {
+          return prev + curr.baseValue * curr.iva * curr.amount;
+        }, 0);
+      }
     }
   },
   {
@@ -21,16 +38,14 @@ export const InvoiceSchema = new Schema<Invoice>(
   }
 );
 
-InvoiceSchema.virtual('total').get(function () {
-  return this.items.reduce((prev, curr) => {
+InvoiceSchema.post('findOneAndUpdate', function(doc) {
+  doc.total = doc.items.reduce((prev: number, curr: InvoiceItem) => {
     return prev + (curr.total || 0) * curr.amount;
   }, 0);
-});
-
-InvoiceSchema.virtual('total_iva').get(function () {
-  return this.items.reduce((prev, curr) => {
+  doc.total_iva = doc.items.reduce((prev: number, curr: InvoiceItem) => {
     return prev + curr.baseValue * curr.iva * curr.amount;
   }, 0);
+  doc.save();
 });
 
 export const InvoiceModel = model<Invoice>('Invoice', InvoiceSchema);

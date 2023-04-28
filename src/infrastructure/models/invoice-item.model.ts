@@ -7,6 +7,12 @@ export const InvoiceItemSchema = new Schema<InvoiceItem>(
     baseValue: { type: Number },
     description: { type: String },
     iva: { type: Number },
+    total: {
+      type: Number,
+      default: function(data: InvoiceItem) {
+        return data.baseValue * data.iva + data.baseValue;
+      }
+    }
   },
   {
     toJSON: { virtuals: true },
@@ -15,6 +21,7 @@ export const InvoiceItemSchema = new Schema<InvoiceItem>(
   }
 );
 
-InvoiceItemSchema.virtual('total').get(function () {
-  return this.baseValue * this.iva + this.baseValue;
+InvoiceItemSchema.post('findOneAndUpdate', function(doc) {
+  doc.total = doc.baseValue * doc.iva + doc.baseValue;
+  doc.save();
 });
