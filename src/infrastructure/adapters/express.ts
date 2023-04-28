@@ -1,4 +1,4 @@
-import express, { Application, Router } from 'express';
+import express, { Application } from 'express';
 import { Initializable } from '../interfaces/initializable';
 import { Logger } from '../../domain/models/logger';
 import { Locals } from './locals';
@@ -66,7 +66,7 @@ export class Express extends Initializable<void> {
       deleteInvoiceUseCase: new DeleteInvoiceUseCase(repositories.invoiceRepository, this.logger),
       findInvoiceUseCase: new FindInvoiceUseCase(repositories.invoiceRepository, this.logger),
       findInvoiceByIdUseCase: new FindInvoiceByIdUseCase(repositories.invoiceRepository, this.logger)
-    }
+    };
   }
 
   initControllers(useCases: UseCases): Controllers {

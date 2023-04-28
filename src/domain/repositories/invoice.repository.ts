@@ -1,5 +1,5 @@
-import { Invoice } from "../../domain/models/invoice";
-import { Logger } from "../../domain/models/logger";
+import { Invoice } from '../../domain/models/invoice';
+import { Logger } from '../../domain/models/logger';
 
 export abstract class InvoiceRepository {
 

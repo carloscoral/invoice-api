@@ -1,8 +1,8 @@
-import { Invoice } from "../../domain/models/invoice";
-import { InvoiceRepository } from "../../domain/repositories/invoice.repository";
-import { Logger } from "../../domain/models/logger";
-import { InvoiceModel } from "../../infrastructure/models/invoice.model";
-import { InvoiceFilter } from "../../infrastructure/interfaces/invoice-filter";
+import { Invoice } from '../../domain/models/invoice';
+import { InvoiceRepository } from '../../domain/repositories/invoice.repository';
+import { Logger } from '../../domain/models/logger';
+import { InvoiceModel } from '../../infrastructure/models/invoice.model';
+import { InvoiceFilter } from '../../infrastructure/interfaces/invoice-filter';
 
 export class InvoiceRepositoryImpl extends InvoiceRepository {
 
@@ -36,7 +36,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
     }
     return {
       $or: mongoFilters
-    }
+    };
   }
 
   find(filters: InvoiceFilter): Promise<Invoice[]> {
@@ -69,7 +69,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
         })
         .catch(e => {
           reject(e);
-        })
+        });
     });
   }
 }

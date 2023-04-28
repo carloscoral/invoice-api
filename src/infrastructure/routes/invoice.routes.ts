@@ -1,7 +1,7 @@
-import { Application, Router } from "express";
-import { Routes } from "./routes";
-import { Logger } from "../../domain/models/logger";
-import { InvoiceController } from "../controllers.ts/invoice.controller";
+import { Application, Router } from 'express';
+import { Routes } from './routes';
+import { Logger } from '../../domain/models/logger';
+import { InvoiceController } from '../controllers.ts/invoice.controller';
 
 export class InvoiceRoutes extends Routes {
 

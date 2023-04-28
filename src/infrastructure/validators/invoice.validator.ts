@@ -7,4 +7,4 @@ export const invoiceValidator = yup
     number: yup.string().required(),
     items: yup.array().of(invoiceItemValidator).required(),
     paid: yup.boolean().required(),
-  })
+  });

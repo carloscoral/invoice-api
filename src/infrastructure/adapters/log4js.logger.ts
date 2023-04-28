@@ -23,23 +23,23 @@ export class Log4jsLogger extends Logger {
     return Log4jsLogger.logger;
   }
 
-  debug(message: any, ...args: any[]): void {
+  debug(message: unknown, ...args: unknown[]): void {
     this.getLogger().debug(message, ...args);
   }
 
-  info(message: any, ...args: any[]): void {
+  info(message: unknown, ...args: unknown[]): void {
     this.getLogger().info(message, ...args);
   }
 
-  warn(message: any, ...args: any[]): void {
+  warn(message: unknown, ...args: unknown[]): void {
     this.getLogger().warn(message, ...args);
   }
 
-  error(message: any, ...args: any[]): void {
+  error(message: unknown, ...args: unknown[]): void {
     this.getLogger().error(message, ...args);
   }
 
-  fatal(message: any, ...args: any[]): void {
+  fatal(message: unknown, ...args: unknown[]): void {
     this.getLogger().fatal(message, ...args);
   }
 }

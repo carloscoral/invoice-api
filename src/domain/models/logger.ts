@@ -1,8 +1,8 @@
 export abstract class Logger {
   constructor(protected level: string) {}
-  abstract debug(message: any, ...args: any[]): void;
-  abstract info(message: any, ...args: any[]): void;
-  abstract warn(message: any, ...args: any[]): void;
-  abstract error(message: any, ...args: any[]): void;
-  abstract fatal(message: any, ...args: any[]): void;
+  abstract debug(message: unknown, ...args: unknown[]): void;
+  abstract info(message: unknown, ...args: unknown[]): void;
+  abstract warn(message: unknown, ...args: unknown[]): void;
+  abstract error(message: unknown, ...args: unknown[]): void;
+  abstract fatal(message: unknown, ...args: unknown[]): void;
 }
