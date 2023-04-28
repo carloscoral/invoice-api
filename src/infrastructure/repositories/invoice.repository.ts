@@ -21,7 +21,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
     const mongoFilters = [];
     if (filters.id) mongoFilters.push({ _id: filters.id });
     if (filters.number) mongoFilters.push({ number: filters.number });
-    if (filters.paid !== undefined) mongoFilters.push({ number: filters.paid });
+    if (filters.paid !== undefined) mongoFilters.push({ paid: filters.paid });
     if (filters.total !== undefined) mongoFilters.push({ total: filters.total });
     if (filters.total_iva !== undefined) mongoFilters.push({ total_iva: filters.total_iva });
     if (filters.item_amount !== undefined) mongoFilters.push({ 'items.amount': filters.item_amount });
