@@ -4,7 +4,6 @@ import { Logger } from '../../domain/models/logger';
 import { Invoice } from '../../domain/models/invoice';
 
 export class CreateInvoiceUseCase extends UseCase<Invoice> {
-
   constructor(private invoiceRepository: InvoiceRepository, logger: Logger) {
     super(logger);
     logger.info('Init CreateInvoiceUseCase');

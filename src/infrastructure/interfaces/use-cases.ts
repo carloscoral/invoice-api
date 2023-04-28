@@ -5,9 +5,9 @@ import { FindInvoiceUseCase } from '../../application/use-cases/find-invoice.use
 import { FindInvoiceByIdUseCase } from 'application/use-cases/find-invoice-by-id.use-case';
 
 export interface UseCases {
-  createInvoiceUseCase: CreateInvoiceUseCase,
-  updateInvoiceUseCase: UpdateInvoiceUseCase,
-  deleteInvoiceUseCase: DeleteInvoiceUseCase,
-  findInvoiceUseCase: FindInvoiceUseCase,
-  findInvoiceByIdUseCase: FindInvoiceByIdUseCase
+  createInvoiceUseCase: CreateInvoiceUseCase;
+  updateInvoiceUseCase: UpdateInvoiceUseCase;
+  deleteInvoiceUseCase: DeleteInvoiceUseCase;
+  findInvoiceUseCase: FindInvoiceUseCase;
+  findInvoiceByIdUseCase: FindInvoiceByIdUseCase;
 }

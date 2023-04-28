@@ -6,14 +6,10 @@ yup.addMethod(yup.string, 'objectId', function (errorMessage) {
     const { path, createError } = this;
     const isObjectId = value && Types.ObjectId.isValid(value);
 
-    return (
-      isObjectId ||
-      createError({ path, message: errorMessage })
-    );
+    return isObjectId || createError({ path, message: errorMessage });
   });
 });
 
-export const idValidator = yup
-  .object({
-    id: yup.string().objectId().required()
-  });
+export const idValidator = yup.object({
+  id: yup.string().objectId().required(),
+});

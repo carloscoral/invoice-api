@@ -4,11 +4,7 @@ import { Logger } from '../../domain/models/logger';
 import { InvoiceController } from '../controllers.ts/invoice.controller';
 
 export class InvoiceRoutes extends Routes {
-
-  constructor(
-    private invoiceController: InvoiceController,
-    logger: Logger,
-  ) {
+  constructor(private invoiceController: InvoiceController, logger: Logger) {
     super(logger);
   }
 
@@ -26,5 +22,4 @@ export class InvoiceRoutes extends Routes {
     app.use('/invoice', router);
     return app;
   }
-
 }

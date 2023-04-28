@@ -10,14 +10,13 @@ import { FindInvoiceUseCase } from '../../application/use-cases/find-invoice.use
 import { FindInvoiceByIdUseCase } from '../../application/use-cases/find-invoice-by-id.use-case';
 
 export class InvoiceController extends Controller {
-
   constructor(
     private createInvoiceUseCase: CreateInvoiceUseCase,
     private updateInvoiceUseCase: UpdateInvoiceUseCase,
     private deleteInvoiceUseCase: DeleteInvoiceUseCase,
     private findInvoiceUseCase: FindInvoiceUseCase,
     private findInvoiceByIdUseCase: FindInvoiceByIdUseCase,
-    logger: Logger
+    logger: Logger,
   ) {
     super(logger);
     logger.info('Init InvoiceController');
@@ -29,7 +28,7 @@ export class InvoiceController extends Controller {
       const { id } = idValidator.validateSync(params, { abortEarly: false, stripUnknown: true });
       const result = await this.findInvoiceByIdUseCase.execute(id);
       if (!result) {
-        return res.status(404).json({ error: 'Not found'});
+        return res.status(404).json({ error: 'Not found' });
       }
       return res.json(result);
     } catch (e) {

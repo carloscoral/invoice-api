@@ -3,8 +3,7 @@ import { UseCase } from './use-case';
 import { Logger } from '../../domain/models/logger';
 import { Invoice } from '../../domain/models/invoice';
 
-export class DeleteInvoiceUseCase extends UseCase<Invoice|null> {
-
+export class DeleteInvoiceUseCase extends UseCase<Invoice | null> {
   constructor(private invoiceRepository: InvoiceRepository, logger: Logger) {
     super(logger);
     logger.info('Init DeleteInvoiceUseCase');

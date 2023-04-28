@@ -10,7 +10,7 @@ export class Database extends Initializable<void> {
   async init() {
     this.logger.info('Connecting to mongo database...');
     await mongoose.connect(this.url, {
-      dbName: this.db
+      dbName: this.db,
     });
     this.logger.info('Mongo database connected');
   }

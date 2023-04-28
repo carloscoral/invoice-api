@@ -13,7 +13,7 @@ function init() {
       database: new Database(envVars.mongoUrl, envVars.mongoDatabase, logger),
       server: new Express(locals, logger),
     },
-    logger
+    logger,
   );
   app.init();
 }

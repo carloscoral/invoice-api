@@ -4,7 +4,6 @@ import { Mountable } from '../interfaces/mountable';
 import { ValidationError } from 'yup';
 
 export class ErrorHandlingMiddleware extends Mountable<Application> {
-
   constructor(private logger: Logger) {
     super();
   }
@@ -14,7 +13,7 @@ export class ErrorHandlingMiddleware extends Mountable<Application> {
       return res.status(422).json({ error: error.errors });
     } else {
       this.logger.error(error);
-      return res.status(500).json( { error: 'Something went wrong' });
+      return res.status(500).json({ error: 'Something went wrong' });
     }
   }
 
@@ -23,5 +22,4 @@ export class ErrorHandlingMiddleware extends Mountable<Application> {
     app = app.use((error: Error, req: Request, res: Response) => this.handleError(error, req, res));
     return app;
   }
-
 }

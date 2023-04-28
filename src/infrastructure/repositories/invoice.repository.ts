@@ -5,7 +5,6 @@ import { InvoiceModel } from '../../infrastructure/models/invoice.model';
 import { InvoiceFilter } from '../../infrastructure/interfaces/invoice-filter';
 
 export class InvoiceRepositoryImpl extends InvoiceRepository {
-
   constructor(logger: Logger) {
     super(logger);
     logger.info('Init InvoiceRepository');
@@ -13,7 +12,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
 
   async save(data: Invoice): Promise<Invoice> {
     const model = new InvoiceModel({
-      ...data
+      ...data,
     });
     return await model.save();
   }
@@ -35,7 +34,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
       return {};
     }
     return {
-      $or: mongoFilters
+      $or: mongoFilters,
     };
   }
 
@@ -47,7 +46,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
     return InvoiceModel.findById(id).exec();
   }
 
-  update(id: string, data: Invoice): Promise<Invoice|null> {
+  update(id: string, data: Invoice): Promise<Invoice | null> {
     return new Promise((resolve, reject) => {
       InvoiceModel.findByIdAndUpdate(id, data, { new: true })
         .then((result) => {
@@ -57,7 +56,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
           }
           resolve(null);
         })
-        .catch(error => reject(error));
+        .catch((error) => reject(error));
     });
   }
 
@@ -67,7 +66,7 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
         .then(() => {
           resolve();
         })
-        .catch(e => {
+        .catch((e) => {
           reject(e);
         });
     });

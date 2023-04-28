@@ -20,7 +20,6 @@ import { DeleteInvoiceUseCase } from '../../application/use-cases/delete-invoice
 import { FindInvoiceUseCase } from '../../application/use-cases/find-invoice.use-case';
 import { FindInvoiceByIdUseCase } from '../../application/use-cases/find-invoice-by-id.use-case';
 
-
 export class Express extends Initializable<void> {
   public express: express.Application;
 
@@ -34,19 +33,14 @@ export class Express extends Initializable<void> {
 
   mountMiddlewares() {
     this.logger.info('Mounting middlewares');
-    const middlewares: Mountable<Application>[] = [
-      new CorsMiddleware(this.logger),
-      new HttpMiddleware(this.logger)
-    ];
+    const middlewares: Mountable<Application>[] = [new CorsMiddleware(this.logger), new HttpMiddleware(this.logger)];
     const bootstrap = new MiddlewareBootstrap(middlewares);
     this.express = bootstrap.init(this.express);
   }
 
   mountPostMiddlewares() {
     this.logger.info('Mounting post middlewares');
-    const middlewares: Mountable<Application>[] = [
-      new ErrorHandlingMiddleware(this.logger)
-    ];
+    const middlewares: Mountable<Application>[] = [new ErrorHandlingMiddleware(this.logger)];
     const bootstrap = new MiddlewareBootstrap(middlewares);
     this.express = bootstrap.init(this.express);
   }
@@ -54,7 +48,7 @@ export class Express extends Initializable<void> {
   initRepositories() {
     this.logger.info('Init repositories');
     return {
-      invoiceRepository: new InvoiceRepositoryImpl(this.logger)
+      invoiceRepository: new InvoiceRepositoryImpl(this.logger),
     };
   }
 
@@ -65,7 +59,7 @@ export class Express extends Initializable<void> {
       updateInvoiceUseCase: new UpdateInvoiceUseCase(repositories.invoiceRepository, this.logger),
       deleteInvoiceUseCase: new DeleteInvoiceUseCase(repositories.invoiceRepository, this.logger),
       findInvoiceUseCase: new FindInvoiceUseCase(repositories.invoiceRepository, this.logger),
-      findInvoiceByIdUseCase: new FindInvoiceByIdUseCase(repositories.invoiceRepository, this.logger)
+      findInvoiceByIdUseCase: new FindInvoiceByIdUseCase(repositories.invoiceRepository, this.logger),
     };
   }
 
@@ -78,8 +72,8 @@ export class Express extends Initializable<void> {
         useCases.deleteInvoiceUseCase,
         useCases.findInvoiceUseCase,
         useCases.findInvoiceByIdUseCase,
-        this.logger
-      )
+        this.logger,
+      ),
     };
   }
 
@@ -88,10 +82,8 @@ export class Express extends Initializable<void> {
     const repositories = this.initRepositories();
     const useCases = this.initUseCases(repositories);
     const controllers = this.initControllers(useCases);
-    const routes: Routes[] = [
-      new InvoiceRoutes(controllers.invoiceController, this.logger)
-    ];
-    for(const route of routes) {
+    const routes: Routes[] = [new InvoiceRoutes(controllers.invoiceController, this.logger)];
+    for (const route of routes) {
       this.express = route.mount(this.express);
     }
   }

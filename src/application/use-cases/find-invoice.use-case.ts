@@ -5,7 +5,6 @@ import { Invoice } from '../../domain/models/invoice';
 import { InvoiceFilter } from '../../infrastructure/interfaces/invoice-filter';
 
 export class FindInvoiceUseCase extends UseCase<Invoice[]> {
-
   constructor(private invoiceRepository: InvoiceRepository, logger: Logger) {
     super(logger);
     logger.info('Init FindInvoiceUseCase');

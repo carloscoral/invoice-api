@@ -22,7 +22,7 @@ export class Locals extends Initializable<Application> {
       mongoDatabase,
       loggerLevel,
       port,
-      corsUrl
+      corsUrl,
     };
   }
 }

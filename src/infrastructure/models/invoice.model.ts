@@ -20,25 +20,25 @@ export const InvoiceSchema = new Schema<Invoice>(
         return data.items.reduce((prev, curr) => {
           return prev + (curr.total || 0) * curr.amount;
         }, 0);
-      }
+      },
     },
     total_iva: {
       type: Number,
-      default: function(data: Invoice) {
+      default: function (data: Invoice) {
         return data.items.reduce((prev, curr) => {
           return prev + curr.baseValue * curr.iva * curr.amount;
         }, 0);
-      }
-    }
+      },
+    },
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-    versionKey: false
-  }
+    versionKey: false,
+  },
 );
 
-InvoiceSchema.post('findOneAndUpdate', function(doc) {
+InvoiceSchema.post('findOneAndUpdate', function (doc) {
   doc.total = doc.items.reduce((prev: number, curr: InvoiceItem) => {
     return prev + (curr.total || 0) * curr.amount;
   }, 0);
