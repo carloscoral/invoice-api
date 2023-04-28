@@ -51,3 +51,5 @@ To start deployed project in docker, execute
 cd containers
 docker compose up -d
 ```
+
+Currently the api is deployed in oracle VPC, the host is http://158.101.113.97:3000
