@@ -80,10 +80,7 @@ export class Express extends Initializable<void> {
         useCases.findInvoiceByIdUseCase,
         this.logger,
       ),
-      authController: new AuthController(
-        useCases.signInUseCase,
-        this.logger,
-      ),
+      authController: new AuthController(useCases.signInUseCase, this.logger),
     };
   }
 

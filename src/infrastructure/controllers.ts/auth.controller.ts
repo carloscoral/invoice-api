@@ -6,10 +6,7 @@ import { signInValidator } from '../validators/sign-in.validator';
 import { Locals } from '../adapters/locals';
 
 export class AuthController extends Controller {
-  constructor(
-    private signInUseCase: SignInUseCase,
-    logger: Logger,
-  ) {
+  constructor(private signInUseCase: SignInUseCase, logger: Logger) {
     super(logger);
     logger.info('Init AuthController');
   }
@@ -22,7 +19,7 @@ export class AuthController extends Controller {
       if (token) {
         return res.json({
           type: 'Bearer',
-          token
+          token,
         });
       }
       return res.status(401).json({ error: 'Not Authorized' });

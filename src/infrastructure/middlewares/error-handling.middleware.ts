@@ -19,7 +19,9 @@ export class ErrorHandlingMiddleware extends Mountable<Application> {
 
   mount(app: Application): Application {
     this.logger.info('Mounting ErrorHandlingMiddleware');
-    app = app.use((error: Error, req: Request, res: Response, next: NextFunction) => this.handleError(error, req, res, next));
+    app = app.use((error: Error, req: Request, res: Response, next: NextFunction) =>
+      this.handleError(error, req, res, next),
+    );
     return app;
   }
 }

@@ -11,5 +11,5 @@ export interface UseCases {
   deleteInvoiceUseCase: DeleteInvoiceUseCase;
   findInvoiceUseCase: FindInvoiceUseCase;
   findInvoiceByIdUseCase: FindInvoiceByIdUseCase;
-  signInUseCase: SignInUseCase
+  signInUseCase: SignInUseCase;
 }
