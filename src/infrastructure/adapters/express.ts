@@ -37,10 +37,7 @@ export class Express extends Initializable<void> {
 
   mountMiddlewares() {
     this.logger.info('Mounting middlewares');
-    const middlewares: Mountable<Application>[] = [
-      new CorsMiddleware(this.logger),
-      new HttpMiddleware(this.logger),
-    ];
+    const middlewares: Mountable<Application>[] = [new CorsMiddleware(this.logger), new HttpMiddleware(this.logger)];
     const bootstrap = new MiddlewareBootstrap(middlewares);
     this.express = bootstrap.init(this.express);
   }

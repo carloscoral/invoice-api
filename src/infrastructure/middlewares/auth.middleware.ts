@@ -28,9 +28,7 @@ export class AuthMiddleware extends Mountable<Application> {
 
   mount(app: Application): Application {
     this.logger.info('Mounting AuthMiddleware');
-    app = app.use((req: Request, res: Response, next: NextFunction) =>
-      AuthMiddleware.verifyAuth(req, res, next),
-    );
+    app = app.use((req: Request, res: Response, next: NextFunction) => AuthMiddleware.verifyAuth(req, res, next));
     return app;
   }
 }

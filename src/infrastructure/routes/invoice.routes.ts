@@ -15,10 +15,18 @@ export class InvoiceRoutes extends Routes {
     const router = Router();
 
     router.get('', AuthMiddleware.verifyAuth, (req, res, next) => this.invoiceController.getInvoices(req, res, next));
-    router.get('/:id', AuthMiddleware.verifyAuth, (req, res, next) => this.invoiceController.getInvoice(req, res, next));
-    router.post('', AuthMiddleware.verifyAuth, (req, res, next) => this.invoiceController.createInvoice(req, res, next));
-    router.put('/:id', AuthMiddleware.verifyAuth, (req, res, next) => this.invoiceController.updateInvoice(req, res, next));
-    router.delete('/:id', AuthMiddleware.verifyAuth, (req, res, next) => this.invoiceController.deleteInvoice(req, res, next));
+    router.get('/:id', AuthMiddleware.verifyAuth, (req, res, next) =>
+      this.invoiceController.getInvoice(req, res, next),
+    );
+    router.post('', AuthMiddleware.verifyAuth, (req, res, next) =>
+      this.invoiceController.createInvoice(req, res, next),
+    );
+    router.put('/:id', AuthMiddleware.verifyAuth, (req, res, next) =>
+      this.invoiceController.updateInvoice(req, res, next),
+    );
+    router.delete('/:id', AuthMiddleware.verifyAuth, (req, res, next) =>
+      this.invoiceController.deleteInvoice(req, res, next),
+    );
 
     app.use('/invoice', router);
     return app;
