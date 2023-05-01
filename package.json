@@ -8,7 +8,7 @@
     "tsc": "npx tsc -p tsconfig.json",
     "start:dev": "npx tsc --watch & NODE_ENV=development nodemon dist",
     "start": "npm run build && node .",
-    "test": "jest --collect-coverage --max-workers=1",
+    "test": "jest --collect-coverage --max-workers=1 ./src",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "npx prettier --write . '!./containers'"
