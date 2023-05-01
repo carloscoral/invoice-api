@@ -17,6 +17,7 @@ export class Locals extends Initializable<Application> {
     const port = process.env.PORT || 3000;
     const corsUrl = process.env.CORS_URL || '';
     const jwtSecret = process.env.JWT_SECRET || '';
+    const redisUrl = process.env.REDIS_URL || ''
 
     return {
       mongoUrl,
@@ -25,6 +26,7 @@ export class Locals extends Initializable<Application> {
       port,
       corsUrl,
       jwtSecret,
+      redisUrl,
     };
   }
 }

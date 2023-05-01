@@ -3,10 +3,15 @@ import { InvoiceRepository } from '../../domain/repositories/invoice.repository'
 import { Logger } from '../../domain/models/logger';
 import { InvoiceModel } from '../../infrastructure/models/invoice.model';
 import { InvoiceFilter } from '../../infrastructure/interfaces/invoice-filter';
+import { RedisClient } from '../adapters/redis';
 
 export class InvoiceRepositoryImpl extends InvoiceRepository {
+
+  redisClient: RedisClient;
+
   constructor(logger: Logger) {
     super(logger);
+    this.redisClient = new RedisClient(this.logger);
     logger.info('Init InvoiceRepository');
   }
 
@@ -42,8 +47,15 @@ export class InvoiceRepositoryImpl extends InvoiceRepository {
     return InvoiceModel.find(this.buildFilters(filters)).exec();
   }
 
-  findById(id: string): Promise<Invoice | null> {
-    return InvoiceModel.findById(id).exec();
+  async findById(id: string): Promise<Invoice | null> {
+    const result = await this.redisClient.get<Invoice>(`/invoice/${id}`);
+    if (result) {
+      this.logger.info('return from redis');
+      return result;
+    }
+    const resultDB = await InvoiceModel.findById(id).exec();
+    await this.redisClient.set(`/invoice/${id}`, resultDB);
+    return resultDB;
   }
 
   update(id: string, data: Invoice): Promise<Invoice | null> {
